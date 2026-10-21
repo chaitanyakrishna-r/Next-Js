@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Rounded Rect -->
+  <rect width="512" height="512" rx="151" fill="url(#skyGrad)"/>
+  
+  <!-- Outer Radar Waves -->
+  <path d="M156 186a140 140 0 0 1 200 0" stroke="rgba(255,255,255,0.25)" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <path d="M186 216a100 100 0 0 1 140 0" stroke="rgba(255,255,255,0.4)" stroke-width="20" stroke-linecap="round" fill="none"/>
+  
+  <!-- Central Cloud & Tower Icon -->
+  <path d="M256 190c-45 0-82 37-82 82-28 3-50 27-50 56 0 31 25 56 56 56h204c31 0 56-25 56-56 0-29-22-53-50-56 0-45-37-82-82-82z" fill="#ffffff" fill-opacity="0.95"/>
+  <circle cx="256" cy="235" r="18" fill="#8b5cf6"/>
+  <path d="M246 250l10-45 10 45" stroke="#8b5cf6" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
