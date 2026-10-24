@@ -4,6 +4,7 @@ import connectDb from "@/config/db";
 import bcrypt from "bcryptjs";
 
 export async function POST(request:NextRequest){
+    console.log('got request')
     try{
 
     
@@ -21,7 +22,7 @@ export async function POST(request:NextRequest){
         )
     }
     // password lenght check
-    if(password.lenght <= 6){
+    if(password.lenght <= 3){
         return NextResponse.json(
             {message:'Password should be atleast 6 character or above'},
             {status: 400}
@@ -49,7 +50,7 @@ export async function POST(request:NextRequest){
     }catch(error){
         console.log(error);
          return NextResponse.json(
-          { error: "Internal Server Error" }, 
+          { error: `Internal Server Error ${error}`}, 
           { status: 500 }
       );
     }

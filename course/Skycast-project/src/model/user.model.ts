@@ -23,8 +23,7 @@ const userSchema = new Schema<Iuser>({
     },
     password:{
         type:String,
-        required: true,
-        maxLength:[20, 'the password length should be less 20 '],
+        required: true, 
         minLength:[8, 'the password length should be more 8 ']
 
     },
@@ -32,7 +31,6 @@ const userSchema = new Schema<Iuser>({
         type:String,
 
     }
-
 },{
     timestamps: true
 })

@@ -1,4 +1,21 @@
+import dns from "node:dns";
 import { connect } from "mongoose";
+
+
+
+
+// console.log("DNS servers:", dns.getServers());
+
+try {
+  const records = await dns.promises.resolveSrv(
+    "_mongodb._tcp.cluster0.nzubnzs.mongodb.net"
+  );
+
+//   console.log("SRV lookup successful:", records);
+} catch (error) {
+//   console.error("SRV lookup failed:", error);
+}
+
 
 
 const mongoUrl = process.env.MONGO_URL;
@@ -18,6 +35,7 @@ const connectDb = async()=>{
         return cached.conn
     }
     if(!cached.promise){
+        dns.setServers(["8.8.8.8"]);
         cached.promise = connect(mongoUrl).then((mongooseInstance) => {
             console.log(`Connected to Db with host: ${mongooseInstance.connection.host}`);
             return mongooseInstance.connection;
@@ -25,6 +43,7 @@ const connectDb = async()=>{
     }
 
     try{
+         
         cached.conn = await cached.promise
     }catch(error){
         cached.promise = null;
