@@ -4,6 +4,7 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
 import User from '@/model/user.model'
 import connectDb from "@/config/db";
 import bcrypt from "bcryptjs";
+import Google from "next-auth/providers/google";
 
 
 
@@ -15,7 +16,7 @@ const authOptions:NextAuthOptions={
             name:'Credentials',
             credentials:{
                 email: {label:"Email", type:'text'},
-                password: {lable:'Password',type:'password'}
+                password: {label:'Password',type:'password'}
             },
             async authorize(credentials,req){
 
@@ -46,13 +47,38 @@ const authOptions:NextAuthOptions={
                     image: user.image,
                 }
             }
-            })
+            }),
+        Google ({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        })    
             
     ],
 
     // at this point after credentialProvider is excuted a token is genereated 
     callbacks:{
         //using jwt function we put infor about user into token object so that we can access this from cookies in frontend
+
+
+        async signIn({account, user}){
+
+            
+            console.log("i am from signIn callback",user)
+            if(account?.provider =="google"){
+
+                await connectDb();
+                const existUser =  await User.findOne({email: user?.email});
+                
+                if(!existUser){
+                    const newUser = await User.create({
+                        name: user?.name,
+                        email: user?.email
+                    })
+                    user.id = newUser._id
+                }
+            }
+            return true;
+        },
 
         async jwt({token,user}){
             if(user){

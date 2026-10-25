@@ -6,7 +6,7 @@ interface Iuser{
     username: string,
     image: string,
     email:string,
-    password:string,
+    password?:string,
     createdAt?: Date,
     updatedAt?: Date
 
@@ -19,12 +19,12 @@ const userSchema = new Schema<Iuser>({
         type:String,
         required: true,
         unique: true,
-        MaxLength:[20,'email should be 20 characters']
+        // MaxLength:[20,'email should be 20 characters']
     },
     password:{
         type:String,
-        required: true, 
-        minLength:[8, 'the password length should be more 8 ']
+        required: false, 
+        // minLength:[8, 'the password length should be more 8 ']
 
     },
     image:{
