@@ -1,13 +1,16 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { FaPencil } from "react-icons/fa6";
 
 
 export default function Home() {
   const { data } = useSession();
   const [loading, setLoading] =useState(false);
+
+  const router = useRouter();
 
   async function handleSignout(){
     setLoading(true);
@@ -23,8 +26,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white px-4 ">
       {data && <div className='w-full max-w-md border-2 border-white rounded-2xl p-8 shadow-lg text-center relative flex flex-col items-center'>
+        <FaPencil size={22} color='white' className='absolute right-5 top-5 cursor-pointer' onClick={()=>router.push('/edit')} />
           {
-            data?.user?.image && <div  className='relative w-[200px] h-[200px] rounded-full border-2 border-white overflow-hidden'>
+            data.user?.image && <div  className='relative w-50 h-50 rounded-full border-2 border-white overflow-hidden'>
               <Image src={data.user?.image} alt="profile-img" fill/>
             </div>
           }

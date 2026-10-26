@@ -60,6 +60,7 @@ const authOptions:NextAuthOptions={
         //using jwt function we put infor about user into token object so that we can access this from cookies in frontend
 
 
+        
         async signIn({account, user}){
 
             
@@ -116,6 +117,6 @@ const authOptions:NextAuthOptions={
         
         error: '/login'
     },
-    secret:process.env.NEXTAUTH_SECRET
+    secret:process.env.NEXT_AUTH_SECRET
 }
 export default authOptions;
