@@ -1,5 +1,6 @@
 "use client";
-import { signOut, useSession } from "next-auth/react";
+import { useUser } from "@/context/UserContext";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -7,7 +8,10 @@ import { FaPencil } from "react-icons/fa6";
 
 
 export default function Home() {
-  const { data } = useSession();
+
+  const data = useUser();
+  console.log("page.tsx: home: ",data)
+  // const { data } = useSession();
   const [loading, setLoading] =useState(false);
 
   const router = useRouter();
@@ -32,7 +36,7 @@ export default function Home() {
               <Image src={data.user?.image} alt="profile-img" fill/>
             </div>
           }
-          <h1 className='text-2xl font-semibold my-4'>Welcome, {data.user?.name}</h1>
+          <h1 className='text-2xl font-semibold my-4'>Welcome, {data.user?.username}</h1>
           <button className='w-full py-2 px-4 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors' onClick={handleSignout}>Sign Out</button>
         </div>}
       {!data && <div className="text-white text-2xl">loading...</div>}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {Roboto} from 'next/font/google'
 import "./globals.css";
 import ChildrenProvider from "@/childrenProvider";
+import { UserContextProvider } from "@/context/UserContext";
 
 
 
@@ -27,8 +28,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
        <ChildrenProvider>
+        <UserContextProvider>
 
         {children}
+        </UserContextProvider>
+
        </ChildrenProvider>
 
        
