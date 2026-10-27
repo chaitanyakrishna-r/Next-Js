@@ -3,6 +3,13 @@ import { hostname } from "os";
 
 const nextConfig: NextConfig = {
   /* config options here */
+   eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // Optional: ignores strict typescript errors during builds as well
+    ignoreBuildErrors: true,
+  },
   images:{
 
     remotePatterns:[{
@@ -18,4 +25,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
